@@ -10,14 +10,15 @@
 #ifndef VELOCITYTOTARGETPOSITION_H
 #define VELOCITYTOTARGETPOSITION_H
 
+#include <rtm/idl/BasicDataTypeSkel.h>
+#include <rtm/idl/ExtendedDataTypesSkel.h>
+#include <rtm/idl/InterfaceDataTypesSkel.h>
+
 #include <rtm/Manager.h>
 #include <rtm/DataFlowComponentBase.h>
 #include <rtm/CorbaPort.h>
 #include <rtm/DataInPort.h>
 #include <rtm/DataOutPort.h>
-#include <rtm/idl/BasicDataTypeSkel.h>
-#include <rtm/idl/ExtendedDataTypesSkel.h>
-#include <rtm/idl/InterfaceDataTypesSkel.h>
 
 // Service implementation headers
 // <rtc-template block="service_impl_h">
@@ -223,7 +224,14 @@ class VelocityToTargetPosition
 
   // Configuration variable declaration
   // <rtc-template block="config_declare">
+  double m_initial_pose_x;
+  double m_initial_pose_y;
+  double m_initial_pose_z;
+  double m_initial_pose_yaw;
+  double m_initial_pose_roll;
+  double m_initial_pose_pitch;
 
+  double m_timeout;
   // </rtc-template>
 
   // DataInPort declaration
@@ -263,6 +271,8 @@ class VelocityToTargetPosition
  private:
   // <rtc-template block="private_attribute">
   
+  Pose3D m_targetPose;
+  coil::TimeValue m_lastVelocityReceivedTime;
   // </rtc-template>
 
   // <rtc-template block="private_operation">
